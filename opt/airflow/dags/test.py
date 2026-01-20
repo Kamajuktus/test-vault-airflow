@@ -1,0 +1,23 @@
+from airflow import DAG
+from airflow.utils.dates import days_ago
+from airflow.operators.python import PythonOperator
+
+# The ID we stored in Vault: airflow/connections/postgres_analytics
+DB_CONNECTION_ID = "postgres_analytics"
+
+def test_operator(conn_id):
+    print(conn_id)
+
+with DAG(
+    'vault_demo_dag',
+    start_date=days_ago(1),
+    schedule_interval=None,
+    catchup=False
+) as dag:
+
+    # Airflow automatically asks Vault for "postgres_analytics"
+    t1 = PythonOperator(
+        task_id='query_db_securely',
+        postgrpython_callable=test_operator,
+        op_args=[DB_CONNECTION_ID]
+    )
