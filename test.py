@@ -1,6 +1,7 @@
 import logging
 from airflow.sdk import DAG
 from datetime import datetime, timedelta
+from airflow.models.baseoperator import chain
 from airflow.operators.python import PythonOperator
 
 # The ID we stored in Vault: airflow/connections/postgres_analytics
@@ -19,6 +20,7 @@ with DAG(
     catchup=False
 ) as dag:
 
+    tasks = []
     # Airflow automatically asks Vault for "postgres_analytics"
     t1 = PythonOperator(
         task_id='query_db_securely',
@@ -26,4 +28,6 @@ with DAG(
         op_args=[DB_CONNECTION_ID]
     )
 
-    t1
+    tasks.append(t1)
+
+    chain(*tasks)
