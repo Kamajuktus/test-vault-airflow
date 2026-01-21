@@ -9,7 +9,7 @@ import hvac
 VAULT_URL = "http://vault.vault.svc.cluster.local:8200"
 VAULT_MOUNT_POINT = "airflow"  # The path where we enabled kv-v2
 VAULT_ROLE = "airflow-role"    # The role we created in Vault
-SECRET_PATH = "airflow/connections"  # The specific secret path
+SECRET_PATH = "smtp_default"  # The specific secret path
 
 logger = logging.getLogger(__name__)
 
