@@ -18,6 +18,6 @@ with DAG(
     # Airflow automatically asks Vault for "postgres_analytics"
     t1 = PythonOperator(
         task_id='query_db_securely',
-        postgrpython_callable=test_operator,
+        python_callable=test_operator,
         op_args=[DB_CONNECTION_ID]
     )
