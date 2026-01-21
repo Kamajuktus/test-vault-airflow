@@ -25,3 +25,5 @@ with DAG(
         python_callable=test_operator,
         op_args=[DB_CONNECTION_ID]
     )
+
+    t1
