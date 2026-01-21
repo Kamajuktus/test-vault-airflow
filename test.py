@@ -1,5 +1,5 @@
 import logging
-from airflow import DAG
+from airflow.sdk import DAG
 from datetime import datetime, timedelta
 from airflow.operators.python import PythonOperator
 
