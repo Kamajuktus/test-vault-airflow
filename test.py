@@ -1,3 +1,4 @@
+import logging
 from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.operators.python import PythonOperator
@@ -6,7 +7,7 @@ from airflow.operators.python import PythonOperator
 DB_CONNECTION_ID = "postgres_analytics"
 
 def test_operator(conn_id):
-    print(conn_id)
+    logging.info(f"Using connection ID: {conn_id}")
 
 with DAG(
     'vault_demo_dag',
