@@ -6,10 +6,11 @@ from airflow.operators.python import PythonOperator
 # The ID we stored in Vault: airflow/connections/postgres_analytics
 DB_CONNECTION_ID = "postgres_analytics"
 
+logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
 def test_operator(conn_id):
-    logging.info(f"Using connection ID: {conn_id}")
+    logger.info(f"Using connection ID: {conn_id}")
 
 with DAG(
     'vault_demo_dag',
