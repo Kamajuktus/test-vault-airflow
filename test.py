@@ -12,6 +12,7 @@ logging.basicConfig(level=logging.INFO)
 
 def test_operator(conn_id):
     logger.info(f"Using connection ID: {conn_id}")
+    return 1
 
 with DAG(
     'vault_demo_dag',
@@ -25,7 +26,7 @@ with DAG(
     t1 = PythonOperator(
         task_id='query_db_securely',
         python_callable=test_operator,
-        op_args=[DB_CONNECTION_ID]
+        op_kwargs=[DB_CONNECTION_ID]
     )
 
     tasks.append(t1)
